@@ -1,15 +1,19 @@
 package uk.co.simonaust.startrekspellinggame;
 
-import org.junit.*;
+import org.junit.Test;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 
 public class CodeWars {
@@ -25,6 +29,8 @@ class TrainingTests {
     @Test
     public void run() {
         assertEquals(0.6, guessBlue(5,5,2,3));
+
+        assertTrue(isLockNessMonster("Hello there friend, do you have tree fiddy I could borrow?"));
 
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
@@ -48,7 +54,32 @@ class TrainingTests {
 //        );
 
     }
-/**
+    /**
+     * You're on your way to the market when you hear beautiful music coming from a nearby street performer.
+     * The notes come together like you wouln't believe as the musician puts together patterns of tunes. As you wonder
+     * what kind of algorithm you could use to shift octaves by 8 pitches or something silly like that, it dawns on you
+     * that you have been watching the musician for some 10 odd minutes. You ask, "how much do people normally tip for
+     * something like this?" The artist looks up. "It's always gonna be about tree fiddy."
+     *
+     * It was then that you realize the musician was a 400 foot tall beast from the paleolithic era! The Loch Ness
+     * Monster almost tricked you!
+     *
+     * There are only 2 guaranteed ways to tell if you are speaking to The Loch Ness Monster: A) it is a 400 foot
+     * tall beast from the paleolithic era; B) it will ask you for tree fiddy.
+     *
+     * Since Nessie is a master of disguise, the only way accurately tell is to look for the phrase "tree fiddy".
+     * Since you are tired of being grifted by this monster, the time has come to code a solution for finding The Loch
+     * Ness Monster. Note that the phrase can also be written as "3.50" or "three fifty". Your function should return
+     * true if you're talking with The Loch Ness Moster, false otherwise.
+     */
+    public static boolean isLockNessMonster(String s){
+        Pattern pattern = Pattern.compile("tree fiddy|3.50|three fifty");
+        Matcher matcher = pattern.matcher(s);
+
+        return matcher.find();
+    }
+
+    /**
  * You and a friend have decided to play a game to drill your statistical intuitions. The game works like this:
  * You have a bunch of red and blue marbles. To start the game you grab a handful of marbles of each color and put them into the bag, keeping track of how many of each color go in. You take turns reaching into the bag, guessing a color, and then pulling one marble out. You get a point if you guessed correctly. The trick is you only have three seconds to make your guess, so you have to think quickly.
  * You've decided to write a function, guessBlue() to help automatically calculate whether you should guess "blue" or "red". The function should take four arguments:
