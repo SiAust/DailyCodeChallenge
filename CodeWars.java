@@ -24,11 +24,12 @@ public class CodeWars {
         training.run();
     }
 }
+
 class TrainingTests {
 
     @Test
     public void run() {
-        assertEquals(0.6, guessBlue(5,5,2,3));
+        assertEquals(0.6, guessBlue(5, 5, 2, 3));
 
         assertTrue(isLockNessMonster("Hello there friend, do you have tree fiddy I could borrow?"));
 
@@ -54,25 +55,11 @@ class TrainingTests {
 //        );
 
     }
+
     /**
-     * You're on your way to the market when you hear beautiful music coming from a nearby street performer.
-     * The notes come together like you wouln't believe as the musician puts together patterns of tunes. As you wonder
-     * what kind of algorithm you could use to shift octaves by 8 pitches or something silly like that, it dawns on you
-     * that you have been watching the musician for some 10 odd minutes. You ask, "how much do people normally tip for
-     * something like this?" The artist looks up. "It's always gonna be about tree fiddy."
-     *
-     * It was then that you realize the musician was a 400 foot tall beast from the paleolithic era! The Loch Ness
-     * Monster almost tricked you!
-     *
-     * There are only 2 guaranteed ways to tell if you are speaking to The Loch Ness Monster: A) it is a 400 foot
-     * tall beast from the paleolithic era; B) it will ask you for tree fiddy.
-     *
-     * Since Nessie is a master of disguise, the only way accurately tell is to look for the phrase "tree fiddy".
-     * Since you are tired of being grifted by this monster, the time has come to code a solution for finding The Loch
-     * Ness Monster. Note that the phrase can also be written as "3.50" or "three fifty". Your function should return
-     * true if you're talking with The Loch Ness Moster, false otherwise.
+     * @link <a href="https://www.codewars.com/kata/55ccdf1512938ce3ac000056/java">Link</a>
      */
-    public static boolean isLockNessMonster(String s){
+    public static boolean isLockNessMonster(String s) {
         Pattern pattern = Pattern.compile("tree fiddy|3.50|three fifty");
         Matcher matcher = pattern.matcher(s);
 
@@ -80,22 +67,15 @@ class TrainingTests {
     }
 
     /**
- * You and a friend have decided to play a game to drill your statistical intuitions. The game works like this:
- * You have a bunch of red and blue marbles. To start the game you grab a handful of marbles of each color and put them into the bag, keeping track of how many of each color go in. You take turns reaching into the bag, guessing a color, and then pulling one marble out. You get a point if you guessed correctly. The trick is you only have three seconds to make your guess, so you have to think quickly.
- * You've decided to write a function, guessBlue() to help automatically calculate whether you should guess "blue" or "red". The function should take four arguments:
- *     the number of blue marbles you put in the bag to start
- *     the number of red marbles you put in the bag to start
- *     the number of blue marbles pulled out so far (always lower than the starting number of blue marbles)
- *     the number of red marbles pulled out so far (always lower than the starting number of red marbles)
- * guessBlue() should return the probability of drawing a blue marble, expressed as a float. For example, guessBlue(5, 5, 2, 3) should return 0.6.
- * @link <a href="https://www.codewars.com/kata/5862f663b4e9d6f12b00003b/java">codewars.com/kata/5862f663b4e9d6f12b00003b/java</a>
- * */
+     * @link <a href="https://www.codewars.com/kata/5862f663b4e9d6f12b00003b/java">codewars.com/kata/5862f663b4e9d6f12b00003b/java</a>
+     */
     public static double guessBlue(int blueStart, int redStart, int bluePulled, int redPulled) {
         int remainingBlue = blueStart - bluePulled;
         int remainingRed = redStart - redPulled;
 
         return (double) remainingBlue / (remainingBlue + remainingRed);
     }
+
     public static String encrypt(final String text, final int n) {
         String temp = text;
         for (int i = 0; i < n; i++) {
@@ -122,6 +102,7 @@ class TrainingTests {
         // Your code here
         return null;
     }
+
     public static Integer calculateTip(double amount, String rating) {
         double onePercent = amount / 100;
         double result = switch (rating.toLowerCase()) {
@@ -154,7 +135,7 @@ class TrainingTests {
                 .collect(Collectors.toSet());
 
         for (int i = 0; i < numArray.length; i++) {
-            if (oddIndices.contains(i) ) {
+            if (oddIndices.contains(i)) {
                 if (!oddIndices.contains(i - 1) && i != 0) {
                     sb.append("-");
                 }
@@ -774,6 +755,7 @@ class TrainingTests {
 
     }
 }
+
 class DayOfWeek {
     public static String getDay(int n) {
 
