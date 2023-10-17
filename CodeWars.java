@@ -1,7 +1,6 @@
 package uk.co.simonaust.startrekspellinggame;
 
-import org.junit.jupiter.api.Test;
-
+import org.junit.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
@@ -9,6 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
+
+import static junit.framework.TestCase.assertEquals;
 
 
 public class CodeWars {
@@ -19,45 +20,11 @@ public class CodeWars {
         training.run();
     }
 }
-
-
-class DayOfWeek {
-    public static String getDay(int n) {
-
-
-        switch (n) {
-            case 1 -> {
-                return "Sunday";
-            }
-            case 2 -> {
-                return "Monday";
-            }
-            case 3 -> {
-                return "Tuesday";
-            }
-            case 4 -> {
-                return "Wednesday";
-            }
-            case 5 -> {
-                return "Thursday";
-            }
-            case 6 -> {
-                return "Friday";
-            }
-            default -> {
-                return "Saturday";
-            }
-        }
-    }
-
-}
-
-
 class TrainingTests {
 
     @Test
     public void run() {
-
+        assertEquals(0.6, guessBlue(5,5,2,3));
 
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
@@ -81,10 +48,22 @@ class TrainingTests {
 //        );
 
     }
-
+/**
+ * You and a friend have decided to play a game to drill your statistical intuitions. The game works like this:
+ * You have a bunch of red and blue marbles. To start the game you grab a handful of marbles of each color and put them into the bag, keeping track of how many of each color go in. You take turns reaching into the bag, guessing a color, and then pulling one marble out. You get a point if you guessed correctly. The trick is you only have three seconds to make your guess, so you have to think quickly.
+ * You've decided to write a function, guessBlue() to help automatically calculate whether you should guess "blue" or "red". The function should take four arguments:
+ *     the number of blue marbles you put in the bag to start
+ *     the number of red marbles you put in the bag to start
+ *     the number of blue marbles pulled out so far (always lower than the starting number of blue marbles)
+ *     the number of red marbles pulled out so far (always lower than the starting number of red marbles)
+ * guessBlue() should return the probability of drawing a blue marble, expressed as a float. For example, guessBlue(5, 5, 2, 3) should return 0.6.
+ * @link <a href="https://www.codewars.com/kata/5862f663b4e9d6f12b00003b/java">codewars.com/kata/5862f663b4e9d6f12b00003b/java</a>
+ * */
     public static double guessBlue(int blueStart, int redStart, int bluePulled, int redPulled) {
-        
-        return 0.9;
+        int remainingBlue = blueStart - bluePulled;
+        int remainingRed = redStart - redPulled;
+
+        return (double) remainingBlue / (remainingBlue + remainingRed);
     }
     public static String encrypt(final String text, final int n) {
         String temp = text;
@@ -763,6 +742,36 @@ class TrainingTests {
 
 
     }
+}
+class DayOfWeek {
+    public static String getDay(int n) {
+
+
+        switch (n) {
+            case 1 -> {
+                return "Sunday";
+            }
+            case 2 -> {
+                return "Monday";
+            }
+            case 3 -> {
+                return "Tuesday";
+            }
+            case 4 -> {
+                return "Wednesday";
+            }
+            case 5 -> {
+                return "Thursday";
+            }
+            case 6 -> {
+                return "Friday";
+            }
+            default -> {
+                return "Saturday";
+            }
+        }
+    }
+
 }
 
 @FunctionalInterface
