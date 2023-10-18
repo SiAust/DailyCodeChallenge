@@ -33,6 +33,8 @@ class TrainingTests {
 
         assertTrue(isLockNessMonster("Hello there friend, do you have tree fiddy I could borrow?"));
 
+        assertEquals("Wleclgltihuebredrf ofsheesenasnegrof", sortMyString("Wolfeschlegelsteinhausenbergerdorff"));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -57,6 +59,23 @@ class TrainingTests {
     }
 
     /**
+     * @link <a href="https://www.codewars.com/kata/580755730b5a77650500010c/train/java">Link</a>
+     */
+    public static String sortMyString(String s) {
+        StringBuilder evenSB = new StringBuilder();
+        StringBuilder oddSB = new StringBuilder();
+        IntStream.range(0, s.length()).forEach(i -> {
+            if (i % 2 == 1) {
+                oddSB.append(s.charAt(i));
+            } else {
+                evenSB.append(s.charAt(i));
+            }
+        });
+
+        return evenSB.toString() + " " + oddSB.toString();
+    }
+
+    /**
      * @link <a href="https://www.codewars.com/kata/55ccdf1512938ce3ac000056/java">Link</a>
      */
     public static boolean isLockNessMonster(String s) {
@@ -67,7 +86,7 @@ class TrainingTests {
     }
 
     /**
-     * @link <a href="https://www.codewars.com/kata/5862f663b4e9d6f12b00003b/java">codewars.com/kata/5862f663b4e9d6f12b00003b/java</a>
+     * @link <a href="https://www.codewars.com/kata/5862f663b4e9d6f12b00003b/java">Link</a>
      */
     public static double guessBlue(int blueStart, int redStart, int bluePulled, int redPulled) {
         int remainingBlue = blueStart - bluePulled;
