@@ -35,6 +35,9 @@ class TrainingTests {
 
         assertEquals("Wleclgltihuebredrf ofsheesenasnegrof", sortMyString("Wolfeschlegelsteinhausenbergerdorff"));
 
+        assertTrue(feast("great blue heron", "garlic naan"));
+        assertTrue(feast("chickadee", "chocolate cake"));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -59,6 +62,26 @@ class TrainingTests {
     }
 
     /**
+     * @link <<a href="https://www.codewars.com/kata/5aa736a455f906981800360d/train/java">Link</a>">Link</a>
+     */
+    public static boolean feast(String beast, String dish) {
+
+        Pattern pattern = Pattern.compile("(^.).*(.$)");
+        List<Matcher> matchers = List.of(pattern.matcher(beast),
+                pattern.matcher(dish));
+        List<String> string = new ArrayList<>();
+        for (Matcher matcher : matchers) {
+            while (matcher.find()) {
+                String word = IntStream.rangeClosed(1, matcher.groupCount())
+                    .mapToObj(matcher::group).collect(Collectors.joining());
+                string.add(word);
+            }
+        }
+
+        return  string.stream().allMatch(string.get(0)::equals);
+    }
+
+    /**
      * @link <a href="https://www.codewars.com/kata/580755730b5a77650500010c/train/java">Link</a>
      */
     public static String sortMyString(String s) {
@@ -72,7 +95,7 @@ class TrainingTests {
             }
         });
 
-        return evenSB.toString() + " " + oddSB.toString();
+        return evenSB + " " + oddSB;
     }
 
     /**
