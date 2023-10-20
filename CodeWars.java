@@ -38,6 +38,10 @@ class TrainingTests {
         assertTrue(feast("great blue heron", "garlic naan"));
         assertTrue(feast("chickadee", "chocolate cake"));
 
+        assertEquals("Oi! Sheep number 1! You are about to be eaten by a wolf!", warnTheSheep(new String[]{"sheep", "wolf", "sheep"}));
+        assertEquals("Pls go away and stop eating my sheep", warnTheSheep(new String[]{"sheep", "sheep", "wolf"}));
+
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -59,6 +63,24 @@ class TrainingTests {
 //
 //        );
 
+    }
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/5c8bfa44b9d1192e1ebd3d15/train/java">Link</a>
+     */
+    public static String warnTheSheep(String[] array) {
+        int arrLen = array.length;
+        String result = "";
+        for (int i = 0; i < arrLen; i++) {
+            if ("wolf".equals(array[i])) {
+                if (i < arrLen - 1) {
+                    result = String.format("Oi! Sheep number %d! You are about to be eaten by a wolf!", arrLen - (i + 1));
+                } else {
+                    result = "Pls go away and stop eating my sheep";
+                }
+            }
+        }
+        return result;
     }
 
     /**
