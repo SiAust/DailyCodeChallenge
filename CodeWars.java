@@ -41,7 +41,7 @@ class TrainingTests {
         assertEquals("Oi! Sheep number 1! You are about to be eaten by a wolf!", warnTheSheep(new String[]{"sheep", "wolf", "sheep"}));
         assertEquals("Pls go away and stop eating my sheep", warnTheSheep(new String[]{"sheep", "sheep", "wolf"}));
 
-
+        assertEquals( "Nope!", "Martin does not play banjo", areYouPlayingBanjo("Martin"));
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -63,6 +63,12 @@ class TrainingTests {
 //
 //        );
 
+    }
+    /**
+     * @link <a href="https://www.codewars.com/kata/53af2b8861023f1d88000832/train/java">Link</a>
+     */
+    public static String areYouPlayingBanjo(String name) {
+        return name + (name.toLowerCase().startsWith("r") ? " plays banjo" : " does not play banjo");
     }
 
     /**
