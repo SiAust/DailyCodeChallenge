@@ -33,15 +33,28 @@ class TrainingTests {
 
         assertTrue(isLockNessMonster("Hello there friend, do you have tree fiddy I could borrow?"));
 
-        assertEquals("Wleclgltihuebredrf ofsheesenasnegrof", sortMyString("Wolfeschlegelsteinhausenbergerdorff"));
+        assertEquals("Wleclgltihuebredrf ofsheesenasnegrof",
+                sortMyString("Wolfeschlegelsteinhausenbergerdorff"));
 
         assertTrue(feast("great blue heron", "garlic naan"));
         assertTrue(feast("chickadee", "chocolate cake"));
 
-        assertEquals("Oi! Sheep number 1! You are about to be eaten by a wolf!", warnTheSheep(new String[]{"sheep", "wolf", "sheep"}));
-        assertEquals("Pls go away and stop eating my sheep", warnTheSheep(new String[]{"sheep", "sheep", "wolf"}));
+        assertEquals("Oi! Sheep number 1! You are about to be eaten by a wolf!",
+                warnTheSheep(new String[]{"sheep", "wolf", "sheep"}));
+        assertEquals("Pls go away and stop eating my sheep",
+                warnTheSheep(new String[]{"sheep", "sheep", "wolf"}));
 
-        assertEquals( "Nope!", "Martin does not play banjo", areYouPlayingBanjo("Martin"));
+        assertEquals("Nope!", "Martin does not play banjo", areYouPlayingBanjo("Martin"));
+
+        assertEquals("i18n", abbreviate("internationalization"));
+        assertEquals("e6t-r3s are r4y fun!", abbreviate("elephant-rides are really fun!"));
+        assertEquals("You n2d, n2d not w2t, to c6e t2s c2e-w2s m5n",
+                abbreviate("You need, need not want, to complete this code-wars mission"));
+        assertEquals("sat sat5cat. mat. a: s2s mat5s2s; cat sat",
+                abbreviate("sat sat5cat. mat. a: sits mat5sits; cat sat"));
+
+
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -64,6 +77,44 @@ class TrainingTests {
 //        );
 
     }
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/5375f921003bf62192000746/train/java">Link</a>
+     */
+    public String abbreviate(String string) {
+        StringBuilder sb = new StringBuilder();
+        String[] words = string.split(" ");
+
+        for (int i = 0; i < words.length; i++) {
+
+            Pattern pattern = Pattern
+                    .compile("((?<longword>[a-zA-Z](?<part>[a-zA-Z]{2,})[a-zA-Z])" +
+                            "|(?<shortword>[a-zA-Z]{1,3}))(?<nonword>[\\W!?.,:;_\\d]{0,2})");
+            Matcher matcher = pattern.matcher(words[i]);
+
+            while (matcher.find()) {
+
+                if (matcher.group("longword") != null) {
+                    String longword = matcher.group("longword");
+                    sb.append(longword.charAt(0));
+                    sb.append(matcher.group("part").length());
+                    sb.append(longword.charAt(longword.length() - 1));
+                }
+                if (matcher.group("shortword") != null) {
+                    sb.append(matcher.group("shortword"));
+                }
+                if (matcher.group("nonword").length() != 0) {
+                    String nonWord = matcher.group("nonword");
+                    sb.append(nonWord.matches("[.,:;]") && i < words.length - 1 ? nonWord + " " : nonWord);
+                } else if (i != words.length - 1){
+                    sb.append(" ");
+                }
+            }
+        }
+
+        return sb.toString();
+    }
+
     /**
      * @link <a href="https://www.codewars.com/kata/53af2b8861023f1d88000832/train/java">Link</a>
      */
@@ -101,12 +152,12 @@ class TrainingTests {
         for (Matcher matcher : matchers) {
             while (matcher.find()) {
                 String word = IntStream.rangeClosed(1, matcher.groupCount())
-                    .mapToObj(matcher::group).collect(Collectors.joining());
+                        .mapToObj(matcher::group).collect(Collectors.joining());
                 string.add(word);
             }
         }
 
-        return  string.stream().allMatch(string.get(0)::equals);
+        return string.stream().allMatch(string.get(0)::equals);
     }
 
     /**
