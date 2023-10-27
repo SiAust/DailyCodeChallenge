@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
+import java.util.function.IntUnaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -91,6 +92,9 @@ class TrainingTests {
         long expectedResult = 54636040;
         assertEquals(expectedResult, stairsIn20(stairs));
 
+        IntUnaryOperator addOne = add(1);
+        assertEquals(4, addOne.applyAsInt(3));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -113,7 +117,13 @@ class TrainingTests {
 //        );
 
     }
-    
+    /**
+     * @link <a href="https://www.codewars.com/kata/538835ae443aae6e03000547/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static IntUnaryOperator add(int n) {
+        return i -> i + n;
+    }
     /**
      * @link <a href="https://www.codewars.com/kata/56fc55cd1f5a93d68a001d4e/train/java">Link</a>
      * Kata Level: 8kyu
