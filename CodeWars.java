@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertArrayEquals;
 
 
 public class CodeWars {
@@ -95,6 +96,8 @@ class TrainingTests {
         IntUnaryOperator addOne = add(1);
         assertEquals(4, addOne.applyAsInt(3));
 
+        assertArrayEquals(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, flattenAndSort(new int[][]{{3, 2, 1}, {7, 9, 8}, {6, 4, 5}}));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -116,6 +119,16 @@ class TrainingTests {
 //
 //        );
 
+    }
+    /**
+     * @link <a href="https://www.codewars.com/kata/57ee99a16c8df7b02d00045f/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static int[] flattenAndSort(int[][] array) {
+        return Arrays.stream(array)
+                .flatMapToInt(IntStream::of)
+                .sorted()
+                .toArray();
     }
     /**
      * @link <a href="https://www.codewars.com/kata/538835ae443aae6e03000547/train/java">Link</a>
