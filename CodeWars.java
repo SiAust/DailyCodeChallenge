@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
+import static java.util.Map.entry;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertArrayEquals;
@@ -89,7 +90,7 @@ class TrainingTests {
                 5460, 9979, 5379, 8501, 6831, 7022, 7575, 5828, 5354, 5115, 9625, 7795, 7003,
                 5524, 9870, 6591, 8616, 5163, 6656, 8150, 8826, 6875, 5242, 9585, 9649, 9838,
                 7150, 6567, 8524, 7613, 7809, 5562, 7799, 7179, 5184, 7960, 9455, 5633, 9085};
-        int[][] stairs = {sunday,monday,tuesday,wednesday,thursday,friday,saturday};
+        int[][] stairs = {sunday, monday, tuesday, wednesday, thursday, friday, saturday};
         long expectedResult = 54636040;
         assertEquals(expectedResult, stairsIn20(stairs));
 
@@ -97,6 +98,10 @@ class TrainingTests {
         assertEquals(4, addOne.applyAsInt(3));
 
         assertArrayEquals(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, flattenAndSort(new int[][]{{3, 2, 1}, {7, 9, 8}, {6, 4, 5}}));
+
+        assertArrayEquals(new int[]{4, 3, 1}, solve(new String[]{"abode", "ABc", "xyzD"}));
+        assertArrayEquals(new int[]{1,3,1,3}, solve(new String[]{"encode","abc","xyzD","ABmD"}));
+        assertArrayEquals(new int[]{2}, solve(new String[]{"Averylongwordthatisbiggert"}));
 
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
@@ -120,6 +125,41 @@ class TrainingTests {
 //        );
 
     }
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/59d9ff9f7905dfeed50000b0/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static int[] solve(String[] arr) {
+        Map<Integer, Character> alphabet = Map.ofEntries(
+                entry(1, 'a'), entry(2, 'b'), entry(3, 'c'),
+                entry(4, 'd'), entry(5, 'e'), entry(6, 'f'),
+                entry(7, 'g'), entry(8, 'h'), entry(9, 'i'),
+                entry(10, 'j'), entry(11, 'k'), entry(12, 'l'),
+                entry(13, 'm'), entry(14, 'n'), entry(15, 'o'),
+                entry(16, 'p'), entry(17, 'q'), entry(18, 'r'),
+                entry(19, 's'), entry(20, 't'), entry(21, 'u'),
+                entry(22, 'v'), entry(23, 'w'), entry(24, 'x'),
+                entry(25, 'y'), entry(26, 'z'));
+
+        int[] result = new int[arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+            int counter = 0;
+            for (int j = 0; j < arr[i].length(); j++) {
+                try {
+                    if (arr[i].toLowerCase().charAt(j) == alphabet.get((j % 26) + 1)) {
+                        counter++;
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e + " alphabet.get("+j + " " + i + ")");
+                }
+            }
+            result[i] = counter;
+        }
+        return result;
+    }
+
     /**
      * @link <a href="https://www.codewars.com/kata/57ee99a16c8df7b02d00045f/train/java">Link</a>
      * Kata Level: 7kyu
@@ -130,6 +170,7 @@ class TrainingTests {
                 .sorted()
                 .toArray();
     }
+
     /**
      * @link <a href="https://www.codewars.com/kata/538835ae443aae6e03000547/train/java">Link</a>
      * Kata Level: 7kyu
@@ -137,6 +178,7 @@ class TrainingTests {
     public static IntUnaryOperator add(int n) {
         return i -> i + n;
     }
+
     /**
      * @link <a href="https://www.codewars.com/kata/56fc55cd1f5a93d68a001d4e/train/java">Link</a>
      * Kata Level: 8kyu
@@ -147,6 +189,7 @@ class TrainingTests {
                 .mapToInt(Integer::valueOf)
                 .sum() * 20;
     }
+
     /**
      * @link <a href="https://www.codewars.com/kata/5375f921003bf62192000746/train/java">Link</a>
      */
@@ -175,7 +218,7 @@ class TrainingTests {
                 if (matcher.group("nonword").length() != 0) {
                     String nonWord = matcher.group("nonword");
                     sb.append(nonWord.matches("[.,:;]") && i < words.length - 1 ? nonWord + " " : nonWord);
-                } else if (i != words.length - 1){
+                } else if (i != words.length - 1) {
                     sb.append(" ");
                 }
             }
