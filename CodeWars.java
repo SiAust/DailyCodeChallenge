@@ -103,6 +103,8 @@ class TrainingTests {
         assertArrayEquals(new int[]{1,3,1,3}, solve(new String[]{"encode","abc","xyzD","ABmD"}));
         assertArrayEquals(new int[]{2}, solve(new String[]{"Averylongwordthatisbiggert"}));
 
+        assertEquals(2, nthSmallest(new int[]{2, 169, 13, -5, 0, -1}, 4));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -124,6 +126,15 @@ class TrainingTests {
 //
 //        );
 
+    }
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/5a512f6a80eba857280000fc/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static int nthSmallest(final int[] arr, final int n) {
+        Arrays.sort(arr);
+        return arr[n - 1];
     }
 
     /**
