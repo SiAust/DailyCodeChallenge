@@ -100,10 +100,12 @@ class TrainingTests {
         assertArrayEquals(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, flattenAndSort(new int[][]{{3, 2, 1}, {7, 9, 8}, {6, 4, 5}}));
 
         assertArrayEquals(new int[]{4, 3, 1}, solve(new String[]{"abode", "ABc", "xyzD"}));
-        assertArrayEquals(new int[]{1,3,1,3}, solve(new String[]{"encode","abc","xyzD","ABmD"}));
+        assertArrayEquals(new int[]{1, 3, 1, 3}, solve(new String[]{"encode", "abc", "xyzD", "ABmD"}));
         assertArrayEquals(new int[]{2}, solve(new String[]{"Averylongwordthatisbiggert"}));
 
         assertEquals(2, nthSmallest(new int[]{2, 169, 13, -5, 0, -1}, 4));
+
+        assertEquals("sort fedcba", "abcdef", sortGiftCode("fedcba"));
 
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
@@ -126,6 +128,28 @@ class TrainingTests {
 //
 //        );
 
+    }
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/52aeb2f3ad0e952f560005d3/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public String sortGiftCode(String code) {
+
+        char[] letters = code.toCharArray();
+        int limit = code.length() - 1;
+        char temp;
+        for (int i = 0; i < code.length() - 1; i ++) {
+            for (int j = 0; j < limit; j++) {
+                if (letters[j] > letters[j + 1]) {
+                    temp = letters[j];
+                    letters[j] = letters[j + 1];
+                    letters[j + 1] = temp;
+                }
+            }
+            limit--;
+        }
+        return String.valueOf(letters);
     }
 
     /**
@@ -163,7 +187,7 @@ class TrainingTests {
                         counter++;
                     }
                 } catch (Exception e) {
-                    throw new RuntimeException(e + " alphabet.get("+j + " " + i + ")");
+                    throw new RuntimeException(e + " alphabet.get(" + j + " " + i + ")");
                 }
             }
             result[i] = counter;
