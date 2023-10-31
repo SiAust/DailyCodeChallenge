@@ -14,8 +14,7 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 import static java.util.Map.entry;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertArrayEquals;
 
 
@@ -107,6 +106,13 @@ class TrainingTests {
 
         assertEquals("sort fedcba", "abcdef", sortGiftCode("fedcba"));
 
+        assertFalse("negative numbers aren't square numbers", isSquare(-1));
+        assertTrue("0 is a square number (0 * 0)", isSquare(0));
+        assertFalse("3 isn't a square number", isSquare(3));
+        assertTrue("4 is a square number (2 * 2)", isSquare(4));
+        assertTrue("25 is a square number (5 * 5)", isSquare(25));
+        assertFalse("26 isn't a square number", isSquare(26));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -128,6 +134,16 @@ class TrainingTests {
 //
 //        );
 
+    }
+    /**
+     * @link <a href="https://www.codewars.com/kata/54c27a33fb7da0db0100040e/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static boolean isSquare(int n) {
+        if (n < 0) return false;
+        double nRootFloor = Math.floor(Math.sqrt(n));
+        double nRoot = Math.sqrt(n);
+        return nRoot == nRootFloor;
     }
 
     /**
