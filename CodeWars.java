@@ -113,6 +113,11 @@ class TrainingTests {
         assertTrue("25 is a square number (5 * 5)", isSquare(25));
         assertFalse("26 isn't a square number", isSquare(26));
 
+        assertEquals(-1, closeCompare(4, 5));
+        assertEquals(0, closeCompare(5, 5));
+        assertEquals(1, closeCompare(6, 5));
+        assertEquals(-1, closeCompare(-6, -5));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -135,6 +140,20 @@ class TrainingTests {
 //        );
 
     }
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/56453a12fcee9a6c4700009c/train/java">Link</a>
+     * Kata Level: 8kyu
+     */
+    public static int closeCompare(double a, double b) {
+        return closeCompare(a, b, 0);
+    }
+
+    public static int closeCompare(double a, double b, double margin) {
+        double distance = a - b;
+        return Math.abs(distance) <= margin ? 0 : distance < 0 ? -1 : 1;
+    }
+
     /**
      * @link <a href="https://www.codewars.com/kata/54c27a33fb7da0db0100040e/train/java">Link</a>
      * Kata Level: 7kyu
@@ -155,7 +174,7 @@ class TrainingTests {
         char[] letters = code.toCharArray();
         int limit = code.length() - 1;
         char temp;
-        for (int i = 0; i < code.length() - 1; i ++) {
+        for (int i = 0; i < code.length() - 1; i++) {
             for (int j = 0; j < limit; j++) {
                 if (letters[j] > letters[j + 1]) {
                     temp = letters[j];
