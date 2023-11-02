@@ -118,6 +118,12 @@ class TrainingTests {
         assertEquals(1, closeCompare(6, 5));
         assertEquals(-1, closeCompare(-6, -5));
 
+        int[] p1={3,4,5};
+        int[] p2={3,5,7};
+        assertEquals(1, pythagoreanTriple(p1));
+
+        assertEquals(0,pythagoreanTriple(p2));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -139,6 +145,20 @@ class TrainingTests {
 //
 //        );
 
+    }
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/5951d30ce99cf2467e000013/train/java">Link</a>
+     * Kata Level: 8kyu
+     */
+    public int pythagoreanTriple(int[] triple) {
+        double[] tripleSquared = Arrays.stream(triple).mapToDouble(i -> Math.pow(i, 2)).toArray();
+        if (tripleSquared[0] + tripleSquared[1] == tripleSquared[2]
+            || tripleSquared[1] + tripleSquared[2] == tripleSquared[0]
+            || tripleSquared[0] + tripleSquared[2] == tripleSquared[1]) {
+            return 1;
+        }
+        return 0;
     }
 
     /**
