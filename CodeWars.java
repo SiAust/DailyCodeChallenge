@@ -124,6 +124,11 @@ class TrainingTests {
 
         assertEquals(0,pythagoreanTriple(p2));
 
+        assertEquals(true, smallEnough(new int[] { 66, 101 }, 200));
+        assertEquals(false, smallEnough(new int[] { 78, 117, 110, 99, 104, 117, 107, 115 }, 100));
+        assertEquals(true, smallEnough(new int[] { 101, 45, 75, 105, 99, 107 }, 107));
+        assertEquals(true, smallEnough(new int[] { 80, 117, 115, 104, 45, 85, 112, 115 }, 120));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -145,6 +150,14 @@ class TrainingTests {
 //
 //        );
 
+    }
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/57cc981a58da9e302a000214/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static boolean smallEnough(int[] a, int limit) {
+        return Arrays.stream(a).filter(i -> i > limit).toArray().length < 1;
     }
 
     /**
