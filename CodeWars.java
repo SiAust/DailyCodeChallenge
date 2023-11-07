@@ -134,6 +134,10 @@ class TrainingTests {
         assertArrayEquals(new int[]{1,2,3,4}, solve(new int[]{1,2,3,4}));
         assertArrayEquals(new int[]{4,5,2,1}, solve(new int[]{1,1,4,5,1,2,1}));
 
+        assertEquals(5.65d, fuelPrice(5, 1.23d), 0.001d);
+        assertEquals(18.40d, fuelPrice(8, 2.5d), 0.001d);
+        assertEquals(27.50d, fuelPrice(5, 5.6d),  0.001d);
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -155,6 +159,15 @@ class TrainingTests {
 //
 //        );
 
+    }
+    /**
+     * @link <a href="https://www.codewars.com/kata/57b58827d2a31c57720012e8/train/java">Link</a>
+     * Kata Level: 8kyu
+     */
+    public static double fuelPrice(int litres, double pricePerLitre) {
+        double centsDiscount = 0.05 * (Math.floor(litres / 2d));
+        if (centsDiscount > .25) centsDiscount = .25;
+        return pricePerLitre * litres - centsDiscount * litres;
     }
 
     /**
