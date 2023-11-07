@@ -118,16 +118,21 @@ class TrainingTests {
         assertEquals(1, closeCompare(6, 5));
         assertEquals(-1, closeCompare(-6, -5));
 
-        int[] p1={3,4,5};
-        int[] p2={3,5,7};
+        int[] p1 = {3, 4, 5};
+        int[] p2 = {3, 5, 7};
         assertEquals(1, pythagoreanTriple(p1));
 
-        assertEquals(0,pythagoreanTriple(p2));
+        assertEquals(0, pythagoreanTriple(p2));
 
-        assertEquals(true, smallEnough(new int[] { 66, 101 }, 200));
-        assertEquals(false, smallEnough(new int[] { 78, 117, 110, 99, 104, 117, 107, 115 }, 100));
-        assertEquals(true, smallEnough(new int[] { 101, 45, 75, 105, 99, 107 }, 107));
-        assertEquals(true, smallEnough(new int[] { 80, 117, 115, 104, 45, 85, 112, 115 }, 120));
+        assertEquals(true, smallEnough(new int[]{66, 101}, 200));
+        assertEquals(false, smallEnough(new int[]{78, 117, 110, 99, 104, 117, 107, 115}, 100));
+        assertEquals(true, smallEnough(new int[]{101, 45, 75, 105, 99, 107}, 107));
+        assertEquals(true, smallEnough(new int[]{80, 117, 115, 104, 45, 85, 112, 115}, 120));
+
+        assertArrayEquals(new int[]{4,6,3}, solve(new int[]{3,4,4,3,6,3}));
+        assertArrayEquals(new int[]{1,2,3}, solve(new int[]{1,2,1,2,1,2,3}));
+        assertArrayEquals(new int[]{1,2,3,4}, solve(new int[]{1,2,3,4}));
+        assertArrayEquals(new int[]{4,5,2,1}, solve(new int[]{1,1,4,5,1,2,1}));
 
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
@@ -153,6 +158,31 @@ class TrainingTests {
     }
 
     /**
+     * @link <a href="https://www.codewars.com/kata/5ba38ba180824a86850000f7/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static int[] solve(int[] arr) {
+        int[] reversed = reverseIntArray(arr);
+        for (int i = arr.length -1, j = 0; i >= 0; i--, j++) {
+            reversed[j] = arr[i];
+        }
+        Set<Integer> set = new LinkedHashSet<>();
+        for (int i = 0; i < reversed.length; i++) {
+            set.add(reversed[i]);
+        }
+
+        return reverseIntArray(set.stream().mapToInt(Integer::intValue).toArray());
+    }
+
+    private static int[] reverseIntArray(int[] arr) {
+        int[] reversed = new int[arr.length];
+        for (int i = arr.length -1, j = 0; i >= 0; i--, j++) {
+            reversed[j] = arr[i];
+        }
+        return reversed;
+    }
+
+    /**
      * @link <a href="https://www.codewars.com/kata/57cc981a58da9e302a000214/train/java">Link</a>
      * Kata Level: 7kyu
      */
@@ -167,8 +197,8 @@ class TrainingTests {
     public int pythagoreanTriple(int[] triple) {
         double[] tripleSquared = Arrays.stream(triple).mapToDouble(i -> Math.pow(i, 2)).toArray();
         if (tripleSquared[0] + tripleSquared[1] == tripleSquared[2]
-            || tripleSquared[1] + tripleSquared[2] == tripleSquared[0]
-            || tripleSquared[0] + tripleSquared[2] == tripleSquared[1]) {
+                || tripleSquared[1] + tripleSquared[2] == tripleSquared[0]
+                || tripleSquared[0] + tripleSquared[2] == tripleSquared[1]) {
             return 1;
         }
         return 0;
