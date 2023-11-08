@@ -138,6 +138,11 @@ class TrainingTests {
         assertEquals(18.40d, fuelPrice(8, 2.5d), 0.001d);
         assertEquals(27.50d, fuelPrice(5, 5.6d),  0.001d);
 
+        assertEquals("Right side wins!", alphabetWar("z"));
+        assertEquals("Let's fight again!", alphabetWar("zdqmwpbs"));
+        assertEquals("Right side wins!", alphabetWar("zzzzs"));
+        assertEquals("Left side wins!", alphabetWar("wwwwwwz"));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -160,6 +165,27 @@ class TrainingTests {
 //        );
 
     }
+    /**
+     * @link <a href="https://www.codewars.com/kata/59377c53e66267c8f6000027/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static String alphabetWar(String fight){
+        int leftScore = 0, rightScore = 0;
+        Map<Character, Integer> leftMap = Map.of('w', 4, 'p', 3, 'b', 2, 's', 1);
+        Map<Character, Integer> rightMap = Map.of('m', 4, 'q', 3, 'd', 2, 'z', 1);
+
+        for (char c : fight.toCharArray()) {
+            if (leftMap.containsKey(c)) {
+                leftScore += leftMap.get(c);
+            } else if (rightMap.containsKey(c)) {
+                rightScore += rightMap.get(c);
+            }
+        }
+
+        return leftScore > rightScore ? "Left side wins!" : leftScore < rightScore ? "Right side wins!"
+                : "Let's fight again!";
+    }
+
     /**
      * @link <a href="https://www.codewars.com/kata/57b58827d2a31c57720012e8/train/java">Link</a>
      * Kata Level: 8kyu
