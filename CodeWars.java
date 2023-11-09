@@ -129,6 +129,17 @@ class TrainingTests {
         assertEquals(true, smallEnough(new int[] { 101, 45, 75, 105, 99, 107 }, 107));
         assertEquals(true, smallEnough(new int[] { 80, 117, 115, 104, 45, 85, 112, 115 }, 120));
 
+
+        assertEquals(20, maxProduct(new int[]{4,3,5}, 2));
+        assertEquals(720, maxProduct(new int[]{10,8,7,9}, 3));
+        assertEquals(4, maxProduct(new int[]{-4,-27,-15,-6,-1}, 2));
+        assertEquals(136, maxProduct(new int[]{-17,-8,-102,-309}, 2));
+        assertEquals(278040420754128896L, maxProduct(new int[]{-100, -100, -97, -96, -95, -94, -94, -91, -89, -82, -80, -76,
+                -76, -75, -68, -67, -66, -65, -61, -60, -59, -59, -57, -56, -55, -52, -47, -46, -45, -39, -35, -34, -33,
+                -24, -20, -20, -20, -20, -17, -16, -12, -6, -1, 1, 3, 5, 7, 8, 8, 8, 9, 10, 12, 15, 18, 20, 22, 25, 29,
+                30, 32, 33, 36, 39, 46, 46, 49, 49, 49, 50, 52, 53, 58, 61, 63, 63, 64, 65, 66, 66, 67, 67, 68, 75, 76,
+                77, 83, 84, 85, 85, 95, 95, 98, 98, 99, 100}, 30));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -150,6 +161,14 @@ class TrainingTests {
 //
 //        );
 
+    }
+    /**
+     * @link <a href="https://www.codewars.com/kata/5a63948acadebff56f000018/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static long maxProduct(int[] numbers, int sub_size) {
+        return Arrays.stream(numbers).sorted().skip(numbers.length - sub_size)
+                .mapToLong(Long::valueOf).reduce(1, (i, j) -> i * j);
     }
 
     /**
