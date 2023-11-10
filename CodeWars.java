@@ -2,6 +2,7 @@ package uk.co.simonaust.startrekspellinggame;
 
 import org.junit.Test;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
@@ -154,6 +155,9 @@ class TrainingTests {
                 30, 32, 33, 36, 39, 46, 46, 49, 49, 49, 50, 52, 53, 58, 61, 63, 63, 64, 65, 66, 66, 67, 67, 68, 75, 76,
                 77, 83, 84, 85, 85, 95, 95, 98, 98, 99, 100}, 30));
 
+        assertEquals(1.62, squareArea(2));
+        assertEquals(0.67, squareArea(1.287593664769168));
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -176,6 +180,18 @@ class TrainingTests {
 //        );
 
     }
+    
+    /**
+     * @link <a href="https://www.codewars.com/kata/5748838ce2fab90b86001b1a/train/java">Link</a>
+     * Kata Level: 8kyu
+     */
+    public static double squareArea(double A){
+        double radius = (4 * A) / (2 * Math.PI);
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return Double.parseDouble(decimalFormat.format(Math.pow(radius, 2)));
+
+    }
+
     /**
      * @link <a href="https://www.codewars.com/kata/5a63948acadebff56f000018/train/java">Link</a>
      * Kata Level: 7kyu
