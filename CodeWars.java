@@ -182,6 +182,14 @@ class TrainingTests {
     }
     
     /**
+     * @link <a href="https://www.codewars.com/kata/59fca81a5712f9fa4700159a/train/java">Link</a>
+     * Kata Level: 8kyu
+     */
+    public static int toBinary(int n) {
+        return Integer.parseInt(Integer.toBinaryString(n));
+    }
+    
+    /**
      * @link <a href="https://www.codewars.com/kata/5748838ce2fab90b86001b1a/train/java">Link</a>
      * Kata Level: 8kyu
      */

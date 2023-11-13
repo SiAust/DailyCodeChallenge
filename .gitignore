@@ -2,3 +2,8 @@
 out
 CodeChallenge.iml
 .idea
+
+# JavaScript
+package.json
+package-lock.json
+node_modules
