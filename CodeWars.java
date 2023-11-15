@@ -158,6 +158,11 @@ class TrainingTests {
         assertEquals(1.62, squareArea(2));
         assertEquals(0.67, squareArea(1.287593664769168));
 
+        assertEquals(1011, toBinary(11));
+
+        Ghost ghost = new Ghost();
+        assertEquals("purple", ghost.getColor());
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -179,6 +184,31 @@ class TrainingTests {
 //
 //        );
 
+    }
+    
+    /**
+     * @link <a href="https://www.codewars.com/kata/53f1015fa9fe02cbda00111a/train/java">Link</a>
+     * Kata Level: 8kyu
+     */
+    class Ghost {
+
+        private static final Random generator = new Random(1);
+
+        public Ghost() {
+        }
+
+        public String getColor() {
+            int random = generator.nextInt(4);
+            System.out.println(random);
+
+            return switch (random) {
+                case 0 -> "white";
+                case 1 -> "yellow";
+                case 2 -> "purple";
+                case 3 -> "red";
+                default -> throw new IllegalStateException("Unexpected value: " + random);
+            };
+        }
     }
     
     /**
