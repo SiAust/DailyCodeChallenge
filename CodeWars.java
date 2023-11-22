@@ -163,6 +163,13 @@ class TrainingTests {
         Ghost ghost = new Ghost();
         assertEquals("purple", ghost.getColor());
 
+        assertEquals(4, longestPalindrome("abba"));
+        assertEquals(1, longestPalindrome("abcd"));
+        assertEquals(4, longestPalindrome("zzbaabcd")); // baab
+        assertEquals(1, longestPalindrome("abcdefghba"));
+
+
+
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
 //            assertEquals("012345", encrypt("012345", 3));
@@ -184,6 +191,45 @@ class TrainingTests {
 //
 //        );
 
+    }
+    
+    /**
+     * @link <a href="https://www.codewars.com/kata/54bb6f887e5a80180900046b/train/java">Link</a>
+     * Kata Level: 6kyu
+     */
+    public static int longestPalindrome(final String s) {
+        if (s.length() < 2) return s.length() == 1 ? 1 : 0;
+        char[] lettersArray = s.toCharArray();
+
+        int palindromeLen = 1;
+
+        for (int i = 0; i < lettersArray.length - 1; i++) {
+
+            for (int j = i + 1; j < lettersArray.length; j++) {
+                int arrSubsetLen = (j - i) + 1;
+
+                if (isPalindrome(Arrays.copyOfRange(lettersArray, i, j + 1))
+                        && arrSubsetLen > palindromeLen) {
+                    palindromeLen = arrSubsetLen;
+                }
+            }
+        }
+
+        return palindromeLen;
+    }
+
+    private static boolean isPalindrome(char[] array) {
+        if (array.length < 2) throw new IllegalArgumentException(
+                String.format("Array size should be greater than 1 "
+                + "to be a possible palindrome. Array: %s%n", Arrays.toString(array)));
+        boolean isPalindrome = true;
+        for (int i = 0, j = array.length - 1; i <= j; i++, j--) {
+            if (array[i] != array[j]) {
+                isPalindrome = false;
+                break;
+            }
+        }
+        return isPalindrome;
     }
     
     /**
