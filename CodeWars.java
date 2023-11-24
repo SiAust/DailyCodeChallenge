@@ -130,14 +130,14 @@ class TrainingTests {
         assertEquals(true, smallEnough(new int[]{101, 45, 75, 105, 99, 107}, 107));
         assertEquals(true, smallEnough(new int[]{80, 117, 115, 104, 45, 85, 112, 115}, 120));
 
-        assertArrayEquals(new int[]{4,6,3}, solve(new int[]{3,4,4,3,6,3}));
-        assertArrayEquals(new int[]{1,2,3}, solve(new int[]{1,2,1,2,1,2,3}));
-        assertArrayEquals(new int[]{1,2,3,4}, solve(new int[]{1,2,3,4}));
-        assertArrayEquals(new int[]{4,5,2,1}, solve(new int[]{1,1,4,5,1,2,1}));
+        assertArrayEquals(new int[]{4, 6, 3}, solve(new int[]{3, 4, 4, 3, 6, 3}));
+        assertArrayEquals(new int[]{1, 2, 3}, solve(new int[]{1, 2, 1, 2, 1, 2, 3}));
+        assertArrayEquals(new int[]{1, 2, 3, 4}, solve(new int[]{1, 2, 3, 4}));
+        assertArrayEquals(new int[]{4, 5, 2, 1}, solve(new int[]{1, 1, 4, 5, 1, 2, 1}));
 
         assertEquals(5.65d, fuelPrice(5, 1.23d), 0.001d);
         assertEquals(18.40d, fuelPrice(8, 2.5d), 0.001d);
-        assertEquals(27.50d, fuelPrice(5, 5.6d),  0.001d);
+        assertEquals(27.50d, fuelPrice(5, 5.6d), 0.001d);
 
         assertEquals("Right side wins!", alphabetWar("z"));
         assertEquals("Let's fight again!", alphabetWar("zdqmwpbs"));
@@ -145,10 +145,10 @@ class TrainingTests {
         assertEquals("Left side wins!", alphabetWar("wwwwwwz"));
 
 
-        assertEquals(20, maxProduct(new int[]{4,3,5}, 2));
-        assertEquals(720, maxProduct(new int[]{10,8,7,9}, 3));
-        assertEquals(4, maxProduct(new int[]{-4,-27,-15,-6,-1}, 2));
-        assertEquals(136, maxProduct(new int[]{-17,-8,-102,-309}, 2));
+        assertEquals(20, maxProduct(new int[]{4, 3, 5}, 2));
+        assertEquals(720, maxProduct(new int[]{10, 8, 7, 9}, 3));
+        assertEquals(4, maxProduct(new int[]{-4, -27, -15, -6, -1}, 2));
+        assertEquals(136, maxProduct(new int[]{-17, -8, -102, -309}, 2));
         assertEquals(278040420754128896L, maxProduct(new int[]{-100, -100, -97, -96, -95, -94, -94, -91, -89, -82, -80, -76,
                 -76, -75, -68, -67, -66, -65, -61, -60, -59, -59, -57, -56, -55, -52, -47, -46, -45, -39, -35, -34, -33,
                 -24, -20, -20, -20, -20, -17, -16, -12, -6, -1, 1, 3, 5, 7, 8, 8, 8, 9, 10, 12, 15, 18, 20, 22, 25, 29,
@@ -167,6 +167,15 @@ class TrainingTests {
         assertEquals(1, longestPalindrome("abcd"));
         assertEquals(4, longestPalindrome("zzbaabcd")); // baab
         assertEquals(1, longestPalindrome("abcdefghba"));
+
+        List<String> a = Arrays.asList("bsjq", "qbsj");
+//        assertEquals(true, containAllRots("", a));
+//        a = Arrays.asList("bsjq", "qbsj", "sjqb", "twZNsslC", "jqbs");
+//        assertTrue(containAllRots("bsjq", a));
+//        a = Arrays.asList("TzYxlgfnhf", "yqVAuoLjMLy", "BhRXjYA", "YABhRXj", "hRXjYAB", "jYABhRX", "XjYABhR", "ABhRXjY");
+//        assertFalse(containAllRots("XjYABhR", a));
+        a = Arrays.asList("DIeF", "IeFD", "12341234", "41234123", "34123412", "23412341");
+        assertTrue(containAllRots("12341234", a));
 
 
 
@@ -192,7 +201,26 @@ class TrainingTests {
 //        );
 
     }
-    
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/5700c9acc1555755be00027e/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static boolean containAllRots(String strng, List<String> arr) {
+        Deque<String> stringDeque = new LinkedList<>(List.of(strng.split("")));
+        for (int i = 0; i < strng.length(); i++) {
+            String rotation = String.join("", stringDeque);
+
+            if (!arr.contains(rotation)) {
+                return false;
+            }
+
+            String last = stringDeque.removeLast();
+            stringDeque.addFirst(last);
+        }
+        return true;
+    }
+
     /**
      * @link <a href="https://www.codewars.com/kata/54bb6f887e5a80180900046b/train/java">Link</a>
      * Kata Level: 6kyu
@@ -221,7 +249,7 @@ class TrainingTests {
     private static boolean isPalindrome(char[] array) {
         if (array.length < 2) throw new IllegalArgumentException(
                 String.format("Array size should be greater than 1 "
-                + "to be a possible palindrome. Array: %s%n", Arrays.toString(array)));
+                        + "to be a possible palindrome. Array: %s%n", Arrays.toString(array)));
         boolean isPalindrome = true;
         for (int i = 0, j = array.length - 1; i <= j; i++, j--) {
             if (array[i] != array[j]) {
@@ -231,7 +259,7 @@ class TrainingTests {
         }
         return isPalindrome;
     }
-    
+
     /**
      * @link <a href="https://www.codewars.com/kata/53f1015fa9fe02cbda00111a/train/java">Link</a>
      * Kata Level: 8kyu
@@ -245,7 +273,6 @@ class TrainingTests {
 
         public String getColor() {
             int random = generator.nextInt(4);
-            System.out.println(random);
 
             return switch (random) {
                 case 0 -> "white";
@@ -256,7 +283,7 @@ class TrainingTests {
             };
         }
     }
-    
+
     /**
      * @link <a href="https://www.codewars.com/kata/59fca81a5712f9fa4700159a/train/java">Link</a>
      * Kata Level: 8kyu
@@ -264,12 +291,12 @@ class TrainingTests {
     public static int toBinary(int n) {
         return Integer.parseInt(Integer.toBinaryString(n));
     }
-    
+
     /**
      * @link <a href="https://www.codewars.com/kata/5748838ce2fab90b86001b1a/train/java">Link</a>
      * Kata Level: 8kyu
      */
-    public static double squareArea(double A){
+    public static double squareArea(double A) {
         double radius = (4 * A) / (2 * Math.PI);
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         return Double.parseDouble(decimalFormat.format(Math.pow(radius, 2)));
@@ -289,7 +316,7 @@ class TrainingTests {
      * @link <a href="https://www.codewars.com/kata/59377c53e66267c8f6000027/train/java">Link</a>
      * Kata Level: 7kyu
      */
-    public static String alphabetWar(String fight){
+    public static String alphabetWar(String fight) {
         int leftScore = 0, rightScore = 0;
         Map<Character, Integer> leftMap = Map.of('w', 4, 'p', 3, 'b', 2, 's', 1);
         Map<Character, Integer> rightMap = Map.of('m', 4, 'q', 3, 'd', 2, 'z', 1);
@@ -322,7 +349,7 @@ class TrainingTests {
      */
     public static int[] solve(int[] arr) {
         int[] reversed = reverseIntArray(arr);
-        for (int i = arr.length -1, j = 0; i >= 0; i--, j++) {
+        for (int i = arr.length - 1, j = 0; i >= 0; i--, j++) {
             reversed[j] = arr[i];
         }
         Set<Integer> set = new LinkedHashSet<>();
@@ -335,7 +362,7 @@ class TrainingTests {
 
     private static int[] reverseIntArray(int[] arr) {
         int[] reversed = new int[arr.length];
-        for (int i = arr.length -1, j = 0; i >= 0; i--, j++) {
+        for (int i = arr.length - 1, j = 0; i >= 0; i--, j++) {
             reversed[j] = arr[i];
         }
         return reversed;
