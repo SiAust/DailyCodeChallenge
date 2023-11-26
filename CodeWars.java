@@ -177,7 +177,8 @@ class TrainingTests {
         a = Arrays.asList("DIeF", "IeFD", "12341234", "41234123", "34123412", "23412341");
         assertTrue(containAllRots("12341234", a));
 
-
+        assertArrayEquals(new String[]{"apple", "banana", "apple", "pineapple", "kiwi"},
+                removeRotten(new String []{"rottenApple","rottenBanana","rottenApple","rottenPineapple","rottenKiwi"}));
 
 //            assertEquals("135024", encrypt("012345", 1));
 //            assertEquals("304152", encrypt("012345", 2));
@@ -200,6 +201,17 @@ class TrainingTests {
 //
 //        );
 
+    }
+
+    /**
+     * @link <a href="https://www.codewars.com/kata/557af4c6169ac832300000ba/train/java">Link</a>
+     * Kata Level: 7kyu
+     */
+    public static String[] removeRotten(String[] fruitBasket) {
+        if (fruitBasket == null) return new String[0];
+        return Arrays.stream(fruitBasket)
+                .map(s -> s.replaceAll("rotten", "").toLowerCase())
+                .toArray(String[]::new);
     }
 
     /**
